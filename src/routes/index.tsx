@@ -5,6 +5,7 @@ import {
 } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 
 // without our own backend to route these requests through
 // the client will see this JWT regardless so there's no point in hiding it
@@ -97,7 +98,11 @@ function MovieCard({ movie }: { movie: Movie }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="relative">
+    <Link
+      to="/title/$slug"
+      params={{ slug: movie.id.toString() }}
+      className="relative block"
+    >
       {!imageLoaded && <MovieCardSkeleton />}
       <img
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -108,7 +113,7 @@ function MovieCard({ movie }: { movie: Movie }) {
       <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
         <p className="text-sm truncate">{movie.title}</p>
       </div>
-    </div>
+    </Link>
   );
 }
 

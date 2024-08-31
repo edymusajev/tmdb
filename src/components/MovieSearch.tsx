@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Movie, TOKEN } from "../routes";
 import { Search, X, Loader2, Image } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
 
 const searchMovies = async (query: string): Promise<Movie[]> => {
   if (!query) return [];
@@ -66,7 +67,8 @@ export function MovieSearch() {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
+        !inputRef.current.contains(event.target as Node) &&
+        !(event.target as Element).closest(".movie-item")
       ) {
         setOpen(false);
       }
@@ -90,7 +92,7 @@ export function MovieSearch() {
           value={search}
           onValueChange={setSearch}
           onFocus={() => setOpen(true)}
-          placeholder="Search IMDb"
+          placeholder="Search movies..."
           className="w-full p-2 pl-10 pr-10 border border-gray-300 rounded-md text-sm focus:outline-none"
         />
         {search && (
@@ -107,7 +109,11 @@ export function MovieSearch() {
       </div>
       {open && (
         <div className="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
-          <SearchResults movies={movies ?? []} isLoading={isLoading} />
+          <SearchResults
+            movies={movies ?? []}
+            isLoading={isLoading}
+            setOpen={setOpen}
+          />
         </div>
       )}
     </Command>
@@ -117,10 +123,19 @@ export function MovieSearch() {
 function SearchResults({
   movies,
   isLoading,
+  setOpen,
 }: {
   movies: Movie[];
   isLoading: boolean;
+  setOpen: (open: boolean) => void;
 }) {
+  const navigate = useNavigate();
+
+  const handleSelect = (movieId: number) => {
+    navigate({ to: "/title/$slug", params: { slug: movieId.toString() } });
+    setOpen(false);
+  };
+
   return (
     <Command.List className="max-h-[70vh] overflow-y-auto p-2">
       {isLoading && (
@@ -139,9 +154,13 @@ function SearchResults({
       )}
 
       {movies.map((movie) => (
-        <Command.Item key={movie.id} value={movie.title}>
+        <div
+          key={movie.id}
+          onClick={() => handleSelect(movie.id)}
+          className="movie-item"
+        >
           <MovieItem movie={movie} />
-        </Command.Item>
+        </div>
       ))}
     </Command.List>
   );
