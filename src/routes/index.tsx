@@ -6,6 +6,12 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 // without our own backend to route these requests through
 // the client will see this JWT regardless so there's no point in hiding it
@@ -70,7 +76,7 @@ function Index() {
   };
 
   return (
-    <div>
+    <div className="mb-4">
       <h1 className="text-2xl font-bold mb-4">Trending Movies</h1>
       {isPending ? (
         <SkeletonLoader />
@@ -85,7 +91,7 @@ function Index() {
           </div>
           <Pagination
             currentPage={page}
-            totalPages={data.total_pages}
+            totalPages={500}
             onPageChange={handlePageChange}
           />
         </>
@@ -145,20 +151,31 @@ function Pagination({
   }
 
   return (
-    <div className="mt-4 flex justify-center items-center space-x-2">
+    <div className="mt-8 flex justify-center items-center space-x-2">
+      <button
+        onClick={() => onPageChange(1)}
+        disabled={currentPage === 1}
+        className="p-2 text-gray-600 hover:text-blue-500 disabled:text-gray-300"
+        aria-label="First page"
+      >
+        <ChevronsLeft size={20} />
+      </button>
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+        className="p-2 text-gray-600 hover:text-blue-500 disabled:text-gray-300"
+        aria-label="Previous page"
       >
-        Previous
+        <ChevronLeft size={20} />
       </button>
       {pageNumbers.map((number) => (
         <button
           key={number}
           onClick={() => onPageChange(number)}
-          className={`px-4 py-2 rounded ${
-            number === currentPage ? "bg-blue-500 text-white" : "bg-gray-200"
+          className={`w-8 h-8 flex items-center justify-center rounded-full ${
+            number === currentPage
+              ? "bg-blue-500 text-white"
+              : "text-gray-600 hover:bg-gray-100"
           }`}
         >
           {number}
@@ -167,9 +184,18 @@ function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+        className="p-2 text-gray-600 hover:text-blue-500 disabled:text-gray-300"
+        aria-label="Next page"
       >
-        Next
+        <ChevronRight size={20} />
+      </button>
+      <button
+        onClick={() => onPageChange(totalPages)}
+        disabled={currentPage === totalPages}
+        className="p-2 text-gray-600 hover:text-blue-500 disabled:text-gray-300"
+        aria-label="Last page"
+      >
+        <ChevronsRight size={20} />
       </button>
     </div>
   );
