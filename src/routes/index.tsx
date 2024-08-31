@@ -9,13 +9,17 @@ import { useState } from "react";
 // without our own backend to route these requests through
 // the client will see this JWT regardless so there's no point in hiding it
 // i'm just hardcoding it here for ease of use during the demo
-const token =
+export const TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNjI4ZDRjNTg1ZTY2MDlkMjQxNDAzYWVjNmVkYzNmYSIsIm5iZiI6MTcyNTA5Mzc2Ny40NDE3OTIsInN1YiI6IjYxNzcxYTIxOTI0Y2U2MDA5MmM4NDcwZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._v35Xy-Q8-p6moAw665X3zEKRs1lNn2eLoRbf2yeMqQ";
 
-interface Movie {
+export interface Movie {
   id: number;
   title: string;
   poster_path: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+  overview: string;
 }
 // API function to fetch trending movies
 const fetchTrendingMovies = async (page: number) => {
@@ -23,7 +27,7 @@ const fetchTrendingMovies = async (page: number) => {
     `https://api.themoviedb.org/3/trending/movie/week?page=${page}`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${TOKEN}`,
       },
     }
   );
@@ -65,7 +69,7 @@ function Index() {
   };
 
   return (
-    <div className="p-4">
+    <div>
       <h1 className="text-2xl font-bold mb-4">Trending Movies</h1>
       {isPending ? (
         <SkeletonLoader />
@@ -73,7 +77,7 @@ function Index() {
         <div>Error: {error.message}</div>
       ) : (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
             {data.results.map((movie) => (
               <MovieCard key={movie.id} movie={movie} />
             ))}
