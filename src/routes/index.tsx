@@ -127,7 +127,6 @@ function MovieCardSkeleton() {
   return (
     <div className="animate-pulse">
       <div className="bg-gray-300 w-full h-[337.50px] rounded-lg"></div>
-      {/* <div className="mt-2 bg-gray-300 h-4 w-3/4 rounded"></div> */}
     </div>
   );
 }
