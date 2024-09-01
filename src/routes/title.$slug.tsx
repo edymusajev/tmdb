@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ScrollRestoration } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { MovieDetails } from "../components/MovieDetails";
 import { fetchMovieDetails, fetchRelatedMovies } from "../utils/api";
@@ -32,11 +31,6 @@ function MovieDetailsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <ScrollRestoration
-        getKey={(location) =>
-          location.pathname.startsWith("/title/") ? location.pathname : ""
-        }
-      />
       <MovieDetails movieId={slug} />
     </div>
   );

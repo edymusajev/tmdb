@@ -4,9 +4,7 @@ import { Movie } from "../utils/api";
 
 export function MovieCardSkeleton() {
   return (
-    <div className="animate-pulse">
-      <div className="bg-gray-300 w-full h-[337.50px] rounded-lg"></div>
-    </div>
+    <div className="animate-pulse w-full h-0 pb-[150%] bg-gray-300 rounded-lg"></div>
   );
 }
 

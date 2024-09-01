@@ -4,9 +4,8 @@ import {
   useSearch,
 } from "@tanstack/react-router";
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { MovieCard } from "../components/MovieCard";
+import { MovieCard, MovieCardSkeleton } from "../components/MovieCard";
 import { Pagination } from "../components/Pagination";
-import { SkeletonLoader } from "../components/SkeletonLoader";
 import { fetchTrendingMovies } from "../utils/api";
 
 export const Route = createFileRoute("/")({
@@ -45,7 +44,11 @@ function Index() {
     <div className="mb-4">
       <h1 className="text-2xl font-bold mb-4">Trending Movies</h1>
       {isPending ? (
-        <SkeletonLoader />
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <MovieCardSkeleton key={index} />
+          ))}
+        </div>
       ) : isError ? (
         <div>Error: {error.message}</div>
       ) : (
