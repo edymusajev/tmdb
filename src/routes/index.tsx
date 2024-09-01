@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
   },
   validateSearch: (search) => {
     return {
-      page: Number(search.page) || 1,
+      page: Number(search?.page ?? 1),
     };
   },
 });
