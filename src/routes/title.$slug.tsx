@@ -2,7 +2,7 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ScrollRestoration } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Movie, TOKEN } from "./index";
+import { Movie, TOKEN } from "../utils/api";
 
 // Types
 interface MovieDetails extends Movie {

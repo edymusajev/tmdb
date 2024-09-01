@@ -2,9 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import { Command } from "cmdk";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
-import { Movie, TOKEN } from "../routes";
 import { Search, X, Loader2, Image } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
+import { Movie, TOKEN } from "../utils/api";
 
 const searchMovies = async (query: string): Promise<Movie[]> => {
   if (!query) return [];
