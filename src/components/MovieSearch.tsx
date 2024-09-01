@@ -2,11 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Command } from "cmdk";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
-import { Search, X, Loader2 } from "lucide-react";
-import { useNavigate } from "@tanstack/react-router";
-import { Movie } from "../utils/api";
+import { Search, X } from "lucide-react";
 import { searchMovies } from "../utils/movieApi";
-import { MovieImage } from "./MovieImage";
 import { SearchResults } from "./SearchResults";
 
 export function MovieSearch() {
