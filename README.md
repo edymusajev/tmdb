@@ -1,50 +1,49 @@
-# React + TypeScript + Vite
+# Movie Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for searching and exploring movies using The Movie Database (TMDB) API.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Check out the live deployment at [https://tmdb-zeta-ebon.vercel.app/](https://tmdb-zeta-ebon.vercel.app/).
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- TanStack Router
+- TanStack Query
+- cmdk
+- useDebounce
 
-- Configure the top-level `parserOptions` property like this:
+### Key Dependencies
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **TanStack Router**: A type-safe routing solution for React applications, providing a more intuitive and performant routing experience compared to traditional React routers.
+- **TanStack Query**: A powerful data fetching and caching library that simplifies server state management, reducing boilerplate and improving performance.
+- **cmdk**: A command palette component that enhances the search functionality, providing a flexible and accessible interface for users to search and navigate.
+- **useDebounce**: A custom hook that helps optimize performance by reducing the number of API calls during user input, particularly useful for search functionality.
+- **Tailwind CSS**: Used instead of Sass for rapid UI development and easy customization. Tailwind's utility-first approach allows for quick iterations and consistent styling.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Installation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Clone the repository:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+   ```bash
+   git clone https://github.com/your-username/movie-search-app.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd movie-search-app
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+## Running the App
+
+To start the development server:
