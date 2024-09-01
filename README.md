@@ -30,13 +30,13 @@ Check out the live deployment at [https://tmdb-zeta-ebon.vercel.app/](https://tm
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/movie-search-app.git
+   git clone https://github.com/edymusajev/tmdb.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd movie-search-app
+   cd tmdb
    ```
 
 3. Install dependencies:
