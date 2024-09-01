@@ -3,10 +3,12 @@ import { ScrollRestoration } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { MovieDetails } from "../components/MovieDetails";
 import { fetchMovieDetails, fetchRelatedMovies } from "../utils/api";
+import { QueryClient } from "@tanstack/react-query";
 
 export const Route = createFileRoute("/title/$slug")({
   component: MovieDetailsPage,
-  loader: ({ params, context: { queryClient } }) => {
+  loader: ({ params, context }) => {
+    const { queryClient } = context as { queryClient: QueryClient };
     const movieId = params.slug;
     return Promise.all([
       queryClient.ensureQueryData({

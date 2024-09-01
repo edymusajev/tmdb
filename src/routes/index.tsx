@@ -3,7 +3,7 @@ import {
   useNavigate,
   useSearch,
 } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { MovieCard } from "../components/MovieCard";
 import { Pagination } from "../components/Pagination";
 import { SkeletonLoader } from "../components/SkeletonLoader";
@@ -12,10 +12,11 @@ import { fetchTrendingMovies } from "../utils/api";
 export const Route = createFileRoute("/")({
   component: Index,
   loader: ({ context }) => {
-    if (!context.queryClient) {
+    const { queryClient } = context as { queryClient: QueryClient };
+    if (!queryClient) {
       throw new Error("QueryClient not found in context");
     }
-    return context.queryClient.prefetchQuery({
+    return queryClient.prefetchQuery({
       queryKey: ["trendingMovies", 1],
       queryFn: () => fetchTrendingMovies(1),
     });

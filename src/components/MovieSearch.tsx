@@ -3,8 +3,8 @@ import { Command } from "cmdk";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Search, X } from "lucide-react";
-import { searchMovies } from "../utils/movieApi";
 import { SearchResults } from "./SearchResults";
+import { searchMovies } from "../utils/api";
 
 export function MovieSearch() {
   const [open, setOpen] = useState(false);
